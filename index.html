@@ -1,0 +1,1619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khushi Beauty Parlour - Premium Beauty Services</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #f8a5c2;
+            --secondary: #f78fb3;
+            --dark: #574b90;
+            --light: #f9f7fe;
+            --accent: #ff9ff3;
+            --success: #78e08f;
+            --warning: #fad390;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header & Navigation */
+        header {
+            background-color: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s;
+        }
+        
+        header.scrolled {
+            padding: 5px 0;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            transition: all 0.3s;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            color: var(--dark);
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        
+        .logo i {
+            color: var(--primary);
+            margin-right: 10px;
+            font-size: 2rem;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+            position: relative;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            left: 0;
+            bottom: -5px;
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .mobile-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark);
+            transition: all 0.3s;
+        }
+        
+        .mobile-toggle:hover {
+            color: var(--primary);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(87, 75, 144, 0.8), rgba(248, 165, 194, 0.8)), url('https://images.unsplash.com/photo-1560066984-138dadb4c035?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 160px 0 100px;
+            text-align: center;
+            margin-top: 80px;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            animation: fadeInDown 1s ease;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            animation: fadeInUp 1s ease;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            border: 2px solid var(--primary);
+            animation: pulse 2s infinite;
+            cursor: pointer;
+            border: none;
+        }
+        
+        .btn:hover {
+            background-color: var(--dark);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .btn-secondary {
+            background-color: var(--dark);
+            border-color: var(--dark);
+        }
+        
+        .btn-secondary:hover {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        /* Services Section */
+        .section-title {
+            text-align: center;
+            margin: 60px 0 40px;
+            color: var(--dark);
+            font-size: 2.5rem;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background: var(--primary);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        
+        .service-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .service-card:hover .book-service {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .service-img {
+            height: 200px;
+            width: 100%;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .service-content {
+            padding: 20px;
+        }
+        
+        .service-content h3 {
+            color: var(--dark);
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+        
+        .service-content p {
+            color: #666;
+            margin-bottom: 15px;
+        }
+        
+        .price {
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+        
+        .book-service {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.3s;
+            z-index: 10;
+        }
+        
+        .book-service:hover {
+            background-color: var(--dark);
+        }
+        
+        /* Testimonials Section */
+        .testimonials {
+            background-color: #f0f0f5;
+            padding: 60px 0;
+            margin: 40px 0;
+        }
+        
+        .testimonial-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .testimonial-slide {
+            display: none;
+            text-align: center;
+            padding: 30px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .testimonial-slide.active {
+            display: block;
+            animation: fadeIn 0.8s ease;
+        }
+        
+        .testimonial-text {
+            font-size: 1.1rem;
+            font-style: italic;
+            margin-bottom: 20px;
+            color: #555;
+        }
+        
+        .testimonial-author {
+            font-weight: 700;
+            color: var(--dark);
+        }
+        
+        .testimonial-rating {
+            color: #ffc107;
+            margin: 10px 0;
+        }
+        
+        .testimonial-controls {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            gap: 10px;
+        }
+        
+        .testimonial-controls button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .testimonial-controls button:hover {
+            background-color: var(--dark);
+        }
+        
+        /* Booking Form */
+        .booking-form-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 2001;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .booking-form-content {
+            background-color: white;
+            width: 90%;
+            max-width: 600px;
+            border-radius: 10px;
+            overflow: hidden;
+            animation: modalFadeIn 0.5s ease;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .booking-form-header {
+            background-color: var(--dark);
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .booking-form-header h2 {
+            font-size: 1.8rem;
+        }
+        
+        .close-booking-form {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .booking-form-body {
+            padding: 30px;
+        }
+        
+        .booking-summary {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--primary);
+        }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            width: 90%;
+            max-width: 500px;
+            border-radius: 10px;
+            overflow: hidden;
+            animation: modalFadeIn 0.5s ease;
+        }
+        
+        .modal-header {
+            background-color: var(--dark);
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-header h2 {
+            font-size: 1.8rem;
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .modal-body {
+            padding: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--dark);
+            font-weight: 600;
+        }
+        
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+        
+        .form-footer {
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .form-footer a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        /* Appointment Dashboard */
+        .appointment-dashboard {
+            display: none;
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin: 40px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .appointment-dashboard h3 {
+            color: var(--dark);
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+        
+        .appointment-list {
+            list-style: none;
+        }
+        
+        .appointment-item {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .appointment-item:last-child {
+            border-bottom: none;
+        }
+        
+        .appointment-details h4 {
+            color: var(--dark);
+            margin-bottom: 5px;
+        }
+        
+        .appointment-status {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .status-confirmed {
+            background-color: #d1f7c4;
+            color: #2e7d32;
+        }
+        
+        .status-pending {
+            background-color: #fff0c2;
+            color: #ff9800;
+        }
+        
+        /* Notification */
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--success);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            z-index: 3000;
+            display: none;
+            animation: slideInRight 0.3s ease;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .social-icons a:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(248, 165, 194, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(248, 165, 194, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(248, 165, 194, 0);
+            }
+        }
+        
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .services-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background-color: white;
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+                box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+                transform: translateY(-100%);
+                opacity: 0;
+                transition: all 0.3s ease;
+                z-index: 999;
+            }
+            
+            .nav-links.active {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            
+            .nav-links li {
+                margin: 15px 0;
+            }
+            
+            .mobile-toggle {
+                display: block;
+            }
+            
+            .hero {
+                padding: 140px 0 80px;
+            }
+            
+            .hero h1 {
+                font-size: 2.3rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .book-service {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .btn {
+                padding: 10px 25px;
+                font-size: 1rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .service-card {
+                margin-bottom: 20px;
+            }
+            
+            .modal-content, .booking-form-content {
+                width: 95%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header id="mainHeader">
+        <div class="container nav-container">
+            <a href="#" class="logo" id="homeLogo">
+                <i class="fas fa-spa"></i>
+                Khushi Beauty
+            </a>
+            
+            <div class="mobile-toggle" id="mobileToggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#services" class="nav-link">Services</a></li>
+                <li><a href="#testimonials" class="nav-link">Testimonials</a></li>
+                <li><a href="#" id="bookNowNav">Book Now</a></li>
+                <li><a href="#" id="loginBtn">Login</a></li>
+                <li><a href="#" id="signupBtn">Sign Up</a></li>
+                <li><a href="#" id="dashboardBtn" style="display: none;">My Bookings</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>Welcome to Khushi Beauty Parlour</h1>
+            <p>Experience the ultimate beauty and wellness treatments in a relaxing environment. Our experts are dedicated to enhancing your natural beauty with premium services.</p>
+            <button class="btn" id="heroBookBtn">Book Appointment Now</button>
+            <button class="btn btn-secondary" id="viewServicesBtn">View Services</button>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services">
+        <div class="container">
+            <h2 class="section-title">Our Beauty Services</h2>
+            <div class="services-grid" id="servicesContainer">
+                <!-- Services will be dynamically loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <h2 class="section-title">What Our Clients Say</h2>
+            <div class="testimonial-container">
+                <div class="testimonial-slide active" id="slide1">
+                    <div class="testimonial-text">
+                        "The best beauty salon experience I've ever had! The staff is professional and the results are amazing. My skin has never looked better."
+                    </div>
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="testimonial-author">- Priya Sharma</div>
+                </div>
+                <div class="testimonial-slide" id="slide2">
+                    <div class="testimonial-text">
+                        "I got my bridal makeup done here and I couldn't be happier! They understood exactly what I wanted and made me feel like a princess on my special day."
+                    </div>
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <div class="testimonial-author">- Anjali Patel</div>
+                </div>
+                <div class="testimonial-slide" id="slide3">
+                    <div class="testimonial-text">
+                        "Regular customer for 2 years now. Their hair treatments are exceptional and have completely transformed my damaged hair. Highly recommend!"
+                    </div>
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="testimonial-author">- Riya Mehta</div>
+                </div>
+                <div class="testimonial-controls">
+                    <button id="prevTestimonial"><i class="fas fa-chevron-left"></i></button>
+                    <button id="nextTestimonial"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Appointment Dashboard -->
+    <div class="container">
+        <div class="appointment-dashboard" id="appointmentDashboard">
+            <h3>My Appointments</h3>
+            <ul class="appointment-list" id="appointmentList">
+                <!-- Appointments will be dynamically loaded here -->
+            </ul>
+        </div>
+    </div>
+
+    <!-- Booking Form -->
+    <div class="booking-form-container" id="bookingFormContainer">
+        <div class="booking-form-content">
+            <div class="booking-form-header">
+                <h2>Book Your Appointment</h2>
+                <button class="close-booking-form" id="closeBookingForm">&times;</button>
+            </div>
+            <div class="booking-form-body">
+                <div class="booking-summary" id="bookingSummary">
+                    <h4>Selected Service: <span id="selectedServiceName">Facial & Skin Care</span></h4>
+                    <p>Price: ₹<span id="selectedServicePrice">800</span></p>
+                </div>
+                <form id="bookingForm">
+                    <div class="form-group">
+                        <label for="bookingName">Full Name</label>
+                        <input type="text" id="bookingName" placeholder="Enter your full name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="bookingPhone">Phone Number</label>
+                        <input type="tel" id="bookingPhone" placeholder="Enter your phone number" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="bookingEmail">Email Address</label>
+                        <input type="email" id="bookingEmail" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="bookingDate">Preferred Date</label>
+                        <input type="date" id="bookingDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="bookingTime">Preferred Time</label>
+                        <select id="bookingTime" required>
+                            <option value="">Select a time</option>
+                            <option value="09:00">09:00 AM</option>
+                            <option value="10:00">10:00 AM</option>
+                            <option value="11:00">11:00 AM</option>
+                            <option value="12:00">12:00 PM</option>
+                            <option value="14:00">02:00 PM</option>
+                            <option value="15:00">03:00 PM</option>
+                            <option value="16:00">04:00 PM</option>
+                            <option value="17:00">05:00 PM</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="bookingNotes">Special Requests (Optional)</label>
+                        <textarea id="bookingNotes" rows="3" placeholder="Any special requirements or notes"></textarea>
+                    </div>
+                    <button type="submit" class="btn" style="width: 100%;">Confirm Booking</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Login to Your Account</h2>
+                <button class="close-modal" id="closeLogin">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="loginEmail">Email Address</label>
+                        <input type="email" id="loginEmail" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">Password</label>
+                        <input type="password" id="loginPassword" placeholder="Enter your password" required>
+                    </div>
+                    <button type="submit" class="btn" style="width: 100%;">Login</button>
+                    <div class="form-footer">
+                        <p>Don't have an account? <a href="#" id="switchToSignup">Sign Up</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div class="modal" id="signupModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Create New Account</h2>
+                <button class="close-modal" id="closeSignup">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="signupForm">
+                    <div class="form-group">
+                        <label for="signupName">Full Name</label>
+                        <input type="text" id="signupName" placeholder="Enter your full name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signupEmail">Email Address</label>
+                        <input type="email" id="signupEmail" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signupPhone">Phone Number</label>
+                        <input type="tel" id="signupPhone" placeholder="Enter your phone number" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signupPassword">Password</label>
+                        <input type="password" id="signupPassword" placeholder="Create a password" required>
+                    </div>
+                    <button type="submit" class="btn" style="width: 100%;">Sign Up</button>
+                    <div class="form-footer">
+                        <p>Already have an account? <a href="#" id="switchToLogin">Login</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        <span id="notificationText">Booking confirmed successfully!</span>
+    </div>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Khushi Beauty Parlour</h3>
+                    <p>Your destination for premium beauty and wellness services. Experience the best in skincare, haircare, and beauty treatments.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home" class="footer-link">Home</a></li>
+                        <li><a href="#services" class="footer-link">Services</a></li>
+                        <li><a href="#testimonials" class="footer-link">Testimonials</a></li>
+                        <li><a href="#contact" class="footer-link">Contact</a></li>
+                        <li><a href="#" id="footerBookBtn">Book Appointment</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Popular Services</h3>
+                    <ul class="footer-links" id="popularServices">
+                        <!-- Popular services will be dynamically loaded -->
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact Info</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Beauty Street, Mumbai</li>
+                        <li><i class="fas fa-phone"></i> +91 98765 43210</li>
+                        <li><i class="fas fa-envelope"></i> info@khushibeauty.com</li>
+                        <li><i class="fas fa-clock"></i> Mon-Sat: 9AM-8PM, Sun: 10AM-6PM</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Khushi Beauty Parlour. All rights reserved. | Designed with <i class="fas fa-heart" style="color: var(--primary);"></i></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Data model for services
+        const services = [
+            {
+                id: 1,
+                name: "Facial & Skin Care",
+                description: "Deep cleansing, exfoliation, extraction, and hydration for radiant skin. Customized for your skin type.",
+                price: 800,
+                image: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                popular: true
+            },
+            {
+                id: 2,
+                name: "Hair Styling & Treatments",
+                description: "From haircuts to coloring, straightening, and spa treatments for healthy, shiny hair.",
+                price: 500,
+                image: "https://images.unsplash.com/photo-1605497788044-5a32c7078486?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                popular: true
+            },
+            {
+                id: 3,
+                name: "Bridal Makeup",
+                description: "Complete bridal package with trial, makeup, hairstyling, and pre-bridal treatments.",
+                price: 10000,
+                image: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                popular: false
+            },
+            {
+                id: 4,
+                name: "Waxing & Threading",
+                description: "Full body waxing, eyebrow threading, and shaping for smooth, hair-free skin.",
+                price: 200,
+                image: "https://images.unsplash.com/photo-1607779097041-6d3e2d21f6b1?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                popular: true
+            },
+            {
+                id: 5,
+                name: "Manicure & Pedicure",
+                description: "Nail care, shaping, polishing, and spa treatments for hands and feet.",
+                price: 600,
+                image: "https://images.unsplash.com/photo-1596462502278-27bfdc403348?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                popular: true
+            },
+            {
+                id: 6,
+                name: "Body Treatments & Massage",
+                description: "Relaxing body massages, scrubs, and wraps for detoxification and rejuvenation.",
+                price: 1500,
+                image: "https://images.unsplash.com/photo-1607779097041-6d3e2d21f6b1?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                popular: false
+            }
+        ];
+
+        // Data model for appointments
+        let appointments = JSON.parse(localStorage.getItem('beautyAppointments')) || [];
+        let currentUser = JSON.parse(localStorage.getItem('currentBeautyUser')) || null;
+        let selectedServiceForBooking = null;
+
+        // DOM Elements
+        const mobileToggle = document.getElementById('mobileToggle');
+        const navLinks = document.getElementById('navLinks');
+        const loginBtn = document.getElementById('loginBtn');
+        const signupBtn = document.getElementById('signupBtn');
+        const loginModal = document.getElementById('loginModal');
+        const signupModal = document.getElementById('signupModal');
+        const closeLogin = document.getElementById('closeLogin');
+        const closeSignup = document.getElementById('closeSignup');
+        const switchToSignup = document.getElementById('switchToSignup');
+        const switchToLogin = document.getElementById('switchToLogin');
+        const servicesContainer = document.getElementById('servicesContainer');
+        const bookingFormContainer = document.getElementById('bookingFormContainer');
+        const closeBookingForm = document.getElementById('closeBookingForm');
+        const bookingForm = document.getElementById('bookingForm');
+        const heroBookBtn = document.getElementById('heroBookBtn');
+        const viewServicesBtn = document.getElementById('viewServicesBtn');
+        const bookNowNav = document.getElementById('bookNowNav');
+        const footerBookBtn = document.getElementById('footerBookBtn');
+        const selectedServiceName = document.getElementById('selectedServiceName');
+        const selectedServicePrice = document.getElementById('selectedServicePrice');
+        const appointmentDashboard = document.getElementById('appointmentDashboard');
+        const appointmentList = document.getElementById('appointmentList');
+        const dashboardBtn = document.getElementById('dashboardBtn');
+        const notification = document.getElementById('notification');
+        const notificationText = document.getElementById('notificationText');
+        const popularServicesList = document.getElementById('popularServices');
+        const prevTestimonialBtn = document.getElementById('prevTestimonial');
+        const nextTestimonialBtn = document.getElementById('nextTestimonial');
+        const testimonialSlides = document.querySelectorAll('.testimonial-slide');
+        const mainHeader = document.getElementById('mainHeader');
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            renderServices();
+            renderPopularServices();
+            updateDashboardVisibility();
+            
+            // Set minimum date for booking to today
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('bookingDate').setAttribute('min', today);
+            
+            // Initialize testimonial slider
+            let currentSlide = 0;
+            showSlide(currentSlide);
+            
+            // Auto-rotate testimonials
+            setInterval(() => {
+                currentSlide = (currentSlide + 1) % testimonialSlides.length;
+                showSlide(currentSlide);
+            }, 5000);
+            
+            // Header scroll effect
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    mainHeader.classList.add('scrolled');
+                } else {
+                    mainHeader.classList.remove('scrolled');
+                }
+            });
+        });
+
+        // Render services dynamically
+        function renderServices() {
+            servicesContainer.innerHTML = '';
+            
+            services.forEach(service => {
+                const serviceCard = document.createElement('div');
+                serviceCard.className = 'service-card';
+                serviceCard.dataset.serviceId = service.id;
+                
+                serviceCard.innerHTML = `
+                    <div class="service-img" style="background-image: url('${service.image}');"></div>
+                    <button class="book-service" data-service-id="${service.id}">Book Now</button>
+                    <div class="service-content">
+                        <h3>${service.name}</h3>
+                        <p>${service.description}</p>
+                        <div class="price">Starting from ₹${service.price}</div>
+                    </div>
+                `;
+                
+                servicesContainer.appendChild(serviceCard);
+                
+                // Add click event to the whole card
+                serviceCard.addEventListener('click', function(e) {
+                    if (!e.target.classList.contains('book-service')) {
+                        openBookingForm(service);
+                    }
+                });
+            });
+            
+            // Add event listeners to "Book Now" buttons
+            document.querySelectorAll('.book-service').forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const serviceId = parseInt(this.dataset.serviceId);
+                    const service = services.find(s => s.id === serviceId);
+                    openBookingForm(service);
+                });
+            });
+        }
+
+        // Render popular services in footer
+        function renderPopularServices() {
+            const popularServices = services.filter(service => service.popular);
+            
+            popularServices.forEach(service => {
+                const li = document.createElement('li');
+                li.innerHTML = `<a href="#" class="popular-service-link" data-service-id="${service.id}">${service.name}</a>`;
+                popularServicesList.appendChild(li);
+            });
+            
+            // Add event listeners to popular service links
+            document.querySelectorAll('.popular-service-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const serviceId = parseInt(this.dataset.serviceId);
+                    const service = services.find(s => s.id === serviceId);
+                    openBookingForm(service);
+                    
+                    // Scroll to services section
+                    document.getElementById('services').scrollIntoView({ behavior: 'smooth' });
+                });
+            });
+        }
+
+        // Open booking form with selected service
+        function openBookingForm(service) {
+            selectedServiceForBooking = service;
+            selectedServiceName.textContent = service.name;
+            selectedServicePrice.textContent = service.price;
+            bookingFormContainer.style.display = 'flex';
+            
+            // Close mobile menu if open
+            closeMobileMenu();
+        }
+
+        // Show notification
+        function showNotification(message, isError = false) {
+            notificationText.textContent = message;
+            notification.style.backgroundColor = isError ? '#ff6b6b' : '#78e08f';
+            notification.style.display = 'block';
+            
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 3000);
+        }
+
+        // Update dashboard visibility based on user login
+        function updateDashboardVisibility() {
+            if (currentUser) {
+                dashboardBtn.style.display = 'block';
+                loginBtn.style.display = 'none';
+                signupBtn.style.display = 'none';
+                renderAppointments();
+            } else {
+                dashboardBtn.style.display = 'none';
+                loginBtn.style.display = 'block';
+                signupBtn.style.display = 'block';
+                appointmentDashboard.style.display = 'none';
+            }
+        }
+
+        // Render appointments in dashboard
+        function renderAppointments() {
+            if (!currentUser || appointments.length === 0) {
+                appointmentList.innerHTML = '<li class="appointment-item">No appointments booked yet.</li>';
+                return;
+            }
+            
+            // Filter appointments for current user
+            const userAppointments = appointments.filter(app => app.userEmail === currentUser.email);
+            
+            if (userAppointments.length === 0) {
+                appointmentList.innerHTML = '<li class="appointment-item">No appointments booked yet.</li>';
+                return;
+            }
+            
+            appointmentList.innerHTML = '';
+            
+            userAppointments.forEach(appointment => {
+                const li = document.createElement('li');
+                li.className = 'appointment-item';
+                
+                // Format date
+                const dateObj = new Date(appointment.date);
+                const formattedDate = dateObj.toLocaleDateString('en-IN', {
+                    weekday: 'short',
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric'
+                });
+                
+                li.innerHTML = `
+                    <div class="appointment-details">
+                        <h4>${appointment.serviceName}</h4>
+                        <p>${formattedDate} at ${appointment.time}</p>
+                        <p>Customer: ${appointment.customerName}</p>
+                    </div>
+                    <div class="appointment-status status-confirmed">Confirmed</div>
+                `;
+                
+                appointmentList.appendChild(li);
+            });
+            
+            appointmentDashboard.style.display = 'block';
+        }
+
+        // Testimonial slider functions
+        function showSlide(index) {
+            testimonialSlides.forEach(slide => {
+                slide.classList.remove('active');
+            });
+            
+            testimonialSlides[index].classList.add('active');
+        }
+
+        // Close mobile menu
+        function closeMobileMenu() {
+            navLinks.classList.remove('active');
+            mobileToggle.querySelector('i').classList.remove('fa-times');
+            mobileToggle.querySelector('i').classList.add('fa-bars');
+        }
+
+        // Mobile Navigation Toggle
+        mobileToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            
+            if (navLinks.classList.contains('active')) {
+                mobileToggle.querySelector('i').classList.remove('fa-bars');
+                mobileToggle.querySelector('i').classList.add('fa-times');
+            } else {
+                mobileToggle.querySelector('i').classList.remove('fa-times');
+                mobileToggle.querySelector('i').classList.add('fa-bars');
+            }
+        });
+
+        // Modal Functionality
+        loginBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            loginModal.style.display = 'flex';
+            closeMobileMenu();
+        });
+
+        signupBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            signupModal.style.display = 'flex';
+            closeMobileMenu();
+        });
+
+        // Close Modals
+        closeLogin.addEventListener('click', () => {
+            loginModal.style.display = 'none';
+        });
+
+        closeSignup.addEventListener('click', () => {
+            signupModal.style.display = 'none';
+        });
+
+        closeBookingForm.addEventListener('click', () => {
+            bookingFormContainer.style.display = 'none';
+        });
+
+        // Switch between Login and Signup
+        switchToSignup.addEventListener('click', (e) => {
+            e.preventDefault();
+            loginModal.style.display = 'none';
+            signupModal.style.display = 'flex';
+        });
+
+        switchToLogin.addEventListener('click', (e) => {
+            e.preventDefault();
+            signupModal.style.display = 'none';
+            loginModal.style.display = 'flex';
+        });
+
+        // Close modals when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === loginModal) {
+                loginModal.style.display = 'none';
+            }
+            if (e.target === signupModal) {
+                signupModal.style.display = 'none';
+            }
+            if (e.target === bookingFormContainer) {
+                bookingFormContainer.style.display = 'none';
+            }
+        });
+
+        // Testimonial navigation
+        prevTestimonialBtn.addEventListener('click', () => {
+            let currentIndex = Array.from(testimonialSlides).findIndex(slide => slide.classList.contains('active'));
+            let newIndex = (currentIndex - 1 + testimonialSlides.length) % testimonialSlides.length;
+            showSlide(newIndex);
+        });
+
+        nextTestimonialBtn.addEventListener('click', () => {
+            let currentIndex = Array.from(testimonialSlides).findIndex(slide => slide.classList.contains('active'));
+            let newIndex = (currentIndex + 1) % testimonialSlides.length;
+            showSlide(newIndex);
+        });
+
+        // Booking button events
+        heroBookBtn.addEventListener('click', () => {
+            openBookingForm(services[0]);
+        });
+
+        viewServicesBtn.addEventListener('click', () => {
+            document.getElementById('services').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        bookNowNav.addEventListener('click', (e) => {
+            e.preventDefault();
+            openBookingForm(services[0]);
+        });
+
+        footerBookBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            openBookingForm(services[0]);
+        });
+
+        // Dashboard button
+        dashboardBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (currentUser) {
+                appointmentDashboard.style.display = appointmentDashboard.style.display === 'block' ? 'none' : 'block';
+                if (appointmentDashboard.style.display === 'block') {
+                    renderAppointments();
+                }
+            } else {
+                loginModal.style.display = 'flex';
+            }
+            closeMobileMenu();
+        });
+
+        // Login Form Submission
+        document.getElementById('loginForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            // Simple validation (in a real app, this would check against a database)
+            if (email && password) {
+                currentUser = { email: email, name: email.split('@')[0] };
+                localStorage.setItem('currentBeautyUser', JSON.stringify(currentUser));
+                showNotification('Login successful! Welcome back.');
+                loginModal.style.display = 'none';
+                updateDashboardVisibility();
+            } else {
+                showNotification('Please enter both email and password.', true);
+            }
+        });
+
+        // Signup Form Submission
+        document.getElementById('signupForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('signupName').value;
+            const email = document.getElementById('signupEmail').value;
+            const phone = document.getElementById('signupPhone').value;
+            const password = document.getElementById('signupPassword').value;
+            
+            // Simple validation
+            if (name && email && phone && password) {
+                currentUser = { email: email, name: name, phone: phone };
+                localStorage.setItem('currentBeautyUser', JSON.stringify(currentUser));
+                showNotification('Account created successfully! Welcome to Khushi Beauty.');
+                signupModal.style.display = 'none';
+                updateDashboardVisibility();
+            } else {
+                showNotification('Please fill all fields.', true);
+            }
+        });
+
+        // Booking Form Submission
+        bookingForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            if (!selectedServiceForBooking) {
+                showNotification('Please select a service first.', true);
+                return;
+            }
+            
+            const customerName = document.getElementById('bookingName').value;
+            const phone = document.getElementById('bookingPhone').value;
+            const email = document.getElementById('bookingEmail').value;
+            const date = document.getElementById('bookingDate').value;
+            const time = document.getElementById('bookingTime').value;
+            const notes = document.getElementById('bookingNotes').value;
+            
+            // Create appointment object
+            const appointment = {
+                id: Date.now(),
+                serviceId: selectedServiceForBooking.id,
+                serviceName: selectedServiceForBooking.name,
+                servicePrice: selectedServiceForBooking.price,
+                customerName: customerName,
+                customerPhone: phone,
+                customerEmail: email,
+                userEmail: currentUser ? currentUser.email : email,
+                date: date,
+                time: time,
+                notes: notes,
+                status: 'confirmed',
+                bookedAt: new Date().toISOString()
+            };
+            
+            // Add to appointments array
+            appointments.push(appointment);
+            
+            // Save to localStorage
+            localStorage.setItem('beautyAppointments', JSON.stringify(appointments));
+            
+            // Show success message
+            showNotification(`Appointment booked for ${selectedServiceForBooking.name} on ${date} at ${time}. We'll contact you soon!`);
+            
+            // Reset form and close
+            bookingForm.reset();
+            bookingFormContainer.style.display = 'none';
+            
+            // Update dashboard if user is logged in
+            if (currentUser) {
+                updateDashboardVisibility();
+            } else {
+                // Prompt user to create account
+                setTimeout(() => {
+                    if (confirm('Would you like to create an account to manage your appointments?')) {
+                        signupModal.style.display = 'flex';
+                        document.getElementById('signupName').value = customerName;
+                        document.getElementById('signupEmail').value = email;
+                        document.getElementById('signupPhone').value = phone;
+                    }
+                }, 1000);
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                if(this.getAttribute('href') === '#') return;
+                
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    closeMobileMenu();
+                }
+            });
+        });
+
+        // Add animation to elements when they come into view
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        // Observe service cards
+        document.querySelectorAll('.service-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            observer.observe(card);
+        });
+        
+        // Home logo click
+        document.getElementById('homeLogo').addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+            closeMobileMenu();
+        });
+        
+        // Logout functionality (hidden)
+        document.addEventListener('keydown', (e) => {
+            // Ctrl+L to logout
+            if (e.ctrlKey && e.key === 'l') {
+                currentUser = null;
+                localStorage.removeItem('currentBeautyUser');
+                updateDashboardVisibility();
+                showNotification('Logged out successfully.');
+            }
+        });
+    </script>
+</body>
+</html>
